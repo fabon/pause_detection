@@ -5,7 +5,6 @@ from evaluate import evaluate
 from config import EPOCHS,LR,BATCH_SIZE,EMBEDDING_SIZE, NUM_CLASS, DEVICE
 
 def main():
-    train_iter = AG_NEWS(split='train')
     model = PauseClassificationModel(VOCAB_SIZE, EMBEDDING_SIZE, NUM_CLASS).to(DEVICE)
 
     from torch.utils.data.dataset import random_split
@@ -17,30 +16,14 @@ def main():
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, 1.0, gamma=0.1)
     
     total_accu = None
-    train_iter, test_iter = AG_NEWS()
-    
-    # train_dataset = to_map_style_dataset(train_iter)
-    # test_dataset = to_map_style_dataset(test_iter)
-    
-    # num_train = int(len(train_dataset) * 0.95)
-    # split_train_, split_valid_ = \
-        
-    # random_split(train_dataset, [num_train, len(train_dataset) - num_train])
 
-    # train_dataloader = DataLoader(split_train_, batch_size=BATCH_SIZE,
-    #                               shuffle=True, collate_fn=collate_batch)
-    # valid_dataloader = DataLoader(split_valid_, batch_size=BATCH_SIZE,
-    #                               shuffle=True, collate_fn=collate_batch)
-    # test_dataloader = DataLoader(test_dataset, batch_size=BATCH_SIZE,
-    #                              shuffle=True, collate_fn=collate_batch)
-
-
+    # TODO: implement train/eval/test splits here
     dataset = PauseDataset("dataset/train.txt", "dataset")
     dataloader = DataLoader(dataset, batch_size=BATCH_SIZE,
                             collate_fn=dataset.collate_fn)
 
-    # for sample in dataloader:
-    #     print(sample.phonemes.shape)
+    # TODO implement tensor format in dataloader: context window left right centered around candidate phoneme + binary label, check tensor formats)
+    
     
     for epoch in range(1, EPOCHS + 1):
         epoch_start_time = time.time()
@@ -51,11 +34,14 @@ def main():
         else:
             total_accu = accu_val
         print('-' * 59)
+        # TODO: give results on train/eval splits here
         print('| end of epoch {:3d} | time: {:5.2f}s | '
               'valid accuracy {:8.3f} '.format(epoch,
                                                time.time() - epoch_start_time,
                                                accu_val))
         print('-' * 59)
 
+        # TODO: give results on test here
+        
 if __name__ == "__main__":
     main()

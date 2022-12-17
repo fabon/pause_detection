@@ -1,3 +1,5 @@
+# FastText like implementation in torch (source: https://pytorch.org/tutorials/beginner/text_sentiment_ngrams_tutorial.html)
+
 from torch import nn
 
 class PauseClassificationModel(nn.Module):

@@ -1,3 +1,5 @@
+# Util code used to evaluate the perf of the classifier (source: https://pytorch.org/tutorials/beginner/text_sentiment_ngrams_tutorial.html )
+
 def evaluate(dataloader):
     model.eval()
     total_acc, total_count = 0, 0

@@ -1,3 +1,5 @@
+# Hyper params and config variables
+
 from data import arpa_symbols
 EPOCHS = 10 
 LR = 5  

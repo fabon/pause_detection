@@ -1,3 +1,5 @@
+# Train fast text like model in torch (source: https://pytorch.org/tutorials/beginner/text_sentiment_ngrams_tutorial.html )
+
 def train(dataloader):
     model.train()
     total_acc, total_count = 0, 0
